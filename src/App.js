@@ -81,6 +81,11 @@ function App() {
     });
   };
 
+  const handleNewStrip = useCallback(() => {
+    setPhotos([]);
+    setCurrentView('camera');
+  }, []);
+
   const getCurrentComponent = () => {
     switch (currentView) {
       case 'camera':
@@ -104,6 +109,7 @@ function App() {
           <FilmStrip
             photos={photos}
             onExport={handleExport}
+            onNewStrip={handleNewStrip}
           />
         );
       default:

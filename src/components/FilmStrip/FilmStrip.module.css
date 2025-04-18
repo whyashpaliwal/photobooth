@@ -1,7 +1,17 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  padding-bottom: 80px; /* Reduced padding due to smaller buttons */
+}
+
 .stripContainer {
   width: 100%;
   max-width: 320px;
-  margin: 20px auto;
+  margin: 20px auto 0;
   background: #1a1a1a;
   background-image: linear-gradient(45deg, #000 25%, transparent 25%),
     linear-gradient(-45deg, #000 25%, transparent 25%),
@@ -17,7 +27,7 @@
   border-radius: 8px;
   padding: 16px 0;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-  height: calc(100vh - 120px);
+  height: calc(100% - 40px); /* Adjusted to account for margin */
   overflow-y: auto;
 }
 
@@ -117,7 +127,7 @@
   display: flex;
   flex-direction: column;
   gap: 24px;
-  padding: 16px 0;
+  padding: 16px 0 64px 0; /* Reduced bottom padding since buttons are smaller */
   overflow-y: auto;
   min-height: 0;
 }
@@ -245,47 +255,56 @@
 }
 
 .buttonGroup {
-  position: relative;
-  z-index: 2;
-  margin-top: 20px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
   display: flex;
   gap: 12px;
   justify-content: center;
+  padding: 16px;
+  background: linear-gradient(to top, 
+    rgba(255, 255, 255, 0.4) 0%,
+    rgba(255, 255, 255, 0.2) 40%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  backdrop-filter: blur(8px);
 }
 
-.exportButton, .shareButton {
-  padding: 12px 24px;
+.exportButton, .shareButton, .newStripButton {
+  padding: 8px 16px;
   color: white;
-  border: none;
-  border-radius: 24px;
-  font-size: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 20px;
+  font-size: 14px;
   font-weight: 500;
   cursor: pointer;
-  transition: transform 0.2s, background-color 0.2s;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  transition: all 0.2s ease;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(8px);
   display: flex;
   align-items: center;
   gap: 8px;
 }
 
+.exportButton:active, .shareButton:active, .newStripButton:active {
+  transform: scale(0.95);
+}
+
 .exportButton {
-  background: #4a90e2;
+  background: rgba(74, 144, 226, 0.6);
+  border-color: rgba(74, 144, 226, 0.8);
 }
 
 .shareButton {
-  background: #2ecc71;
+  background: rgba(46, 204, 113, 0.6);
+  border-color: rgba(46, 204, 113, 0.8);
 }
 
-.exportButton:active, .shareButton:active {
-  transform: scale(0.98);
-}
-
-.exportButton:active {
-  background: #357abd;
-}
-
-.shareButton:active {
-  background: #27ae60;
+.newStripButton {
+  background: rgba(76, 175, 80, 0.6);
+  border-color: rgba(76, 175, 80, 0.8);
 }
 
 @keyframes slideIn {

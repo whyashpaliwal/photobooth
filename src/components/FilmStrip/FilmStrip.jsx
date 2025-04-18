@@ -4,6 +4,7 @@ import { useSwipeable } from 'react-swipeable';
 import DeleteIcon from '@mui/icons-material/Delete';
 import ShareIcon from '@mui/icons-material/Share';
 import SaveIcon from '@mui/icons-material/Save';
+import AddIcon from '@mui/icons-material/Add';
 import styles from './FilmStrip.module.css';
 
 const PhotoFrame = React.memo(({ photo, index, style, onDelete, onDragStart, onDragMove, onDragEnd, isDragging }) => {
@@ -71,7 +72,7 @@ const Perforations = React.memo(() => {
   );
 });
 
-const FilmStrip = ({ photos: initialPhotos, onExport }) => {
+const FilmStrip = ({ photos: initialPhotos, onExport, onNewStrip }) => {
   const [photos, setPhotos] = useState(initialPhotos);
   const [draggedItem, setDraggedItem] = useState(null);
   const [swipeIndex, setSwipeIndex] = useState(null);
@@ -182,39 +183,41 @@ const FilmStrip = ({ photos: initialPhotos, onExport }) => {
   };
 
   return (
-    <div className={styles.stripContainer} id="film-strip">
-      <div className={styles.stripBackground} />
-      <div className={styles.stripGrain} />
-      <Perforations />
-      
-      {Array(8).fill(null).map((_, i) => (
-        <div
-          key={`mark-${i}`}
-          className={styles.exposureMark}
-          style={{ top: `${(i + 1) * 12}%` }}
-        />
-      ))}
-      
-      <div className={styles.photosContainer}>
-        {transitions((style, photo, _, index) => (
-          <PhotoFrame
-            key={photo.id}
-            photo={photo}
-            index={index}
-            style={{
-              ...style,
-              x: swipeIndex === index ? x : 0,
-              transform: draggedItem?.index === index 
-                ? `translateY(${draggedItem.currentY - draggedItem.startY}px)` 
-                : style.transform
-            }}
-            onDelete={handleDelete}
-            onDragStart={handleDragStart}
-            onDragMove={handleDragMove}
-            onDragEnd={handleDragEnd}
-            isDragging={draggedItem?.index === index}
+    <div className={styles.wrapper}>
+      <div className={styles.stripContainer} id="film-strip">
+        <div className={styles.stripBackground} />
+        <div className={styles.stripGrain} />
+        <Perforations />
+        
+        {Array(8).fill(null).map((_, i) => (
+          <div
+            key={`mark-${i}`}
+            className={styles.exposureMark}
+            style={{ top: `${(i + 1) * 12}%` }}
           />
         ))}
+        
+        <div className={styles.photosContainer}>
+          {transitions((style, photo, _, index) => (
+            <PhotoFrame
+              key={photo.id}
+              photo={photo}
+              index={index}
+              style={{
+                ...style,
+                x: swipeIndex === index ? x : 0,
+                transform: draggedItem?.index === index 
+                  ? `translateY(${draggedItem.currentY - draggedItem.startY}px)` 
+                  : style.transform
+              }}
+              onDelete={handleDelete}
+              onDragStart={handleDragStart}
+              onDragMove={handleDragMove}
+              onDragEnd={handleDragEnd}
+              isDragging={draggedItem?.index === index}
+            />
+          ))}
+        </div>
       </div>
 
       <div className={styles.buttonGroup}>
@@ -233,6 +236,14 @@ const FilmStrip = ({ photos: initialPhotos, onExport }) => {
         >
           <ShareIcon />
           <span>Share</span>
+        </button>
+        <button
+          onClick={onNewStrip}
+          className={styles.newStripButton}
+          aria-label="Create new photo strip"
+        >
+          <AddIcon />
+          <span>New Strip</span>
         </button>
       </div>
     </div>
