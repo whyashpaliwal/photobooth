@@ -293,18 +293,18 @@
 }
 
 .exportButton {
-  background: rgba(74, 144, 226, 0.6);
+  background: rgba(85, 164, 255, 0.862);
   border-color: rgba(74, 144, 226, 0.8);
 }
 
 .shareButton {
-  background: rgba(46, 204, 113, 0.6);
+  background: rgb(0, 201, 84);
   border-color: rgba(46, 204, 113, 0.8);
 }
 
 .newStripButton {
-  background: rgba(76, 175, 80, 0.6);
-  border-color: rgba(76, 175, 80, 0.8);
+  background: rgba(85, 164, 255, 0.862);
+  border-color: rgba(74, 144, 226, 0.8);
 }
 
 @keyframes slideIn {
