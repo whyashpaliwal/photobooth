@@ -3,6 +3,7 @@
   height: 100vh;
   max-width: 480px;
   margin: 0 auto;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   position: relative;
@@ -33,11 +34,13 @@
 
 .content {
   flex: 1;
-  overflow: hidden;
+  overflow-y: auto;
   position: relative;
+  -webkit-overflow-scrolling: touch;
   display: flex;
   flex-direction: column;
   width: 100%;
+  padding-bottom: 100px; /* Adjusted for horizontal buttons */
 }
 
 .pageTransition {
